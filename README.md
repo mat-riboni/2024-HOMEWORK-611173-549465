@@ -1,4 +1,4 @@
-# POO HOMEWORK 
+# 2024 POO HOMEWORK 
 Homework di programmazione orientata agli oggetti di:
 - **Mattia Riboni** [611173]
 - **Riccardo Catapano** [549465]
