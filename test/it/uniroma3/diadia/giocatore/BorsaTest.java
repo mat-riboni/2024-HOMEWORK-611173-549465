@@ -24,14 +24,14 @@ class BorsaTest {
 	}
 	
 	@Test
-	public void testAddAttrezzoOltrePesoMassimo() {
+	public void testAddAttrezzo_oltrePesoMassimo() {
 		Attrezzo attrezzoPesante = new Attrezzo("attrezzoPesante", this.borsa.getPesoMax());
 		this.borsa.addAttrezzo(attrezzoPesante);
 		assertFalse(this.borsa.hasAttrezzo(attrezzoPesante.getNome()));
 	}
 	
 	@Test
-	public void testAddAttrezzoOltreNumeroMassimo() {
+	public void testAddAttrezzo_oltreNumeroMassimo() {
 		Attrezzo attrezzo = new Attrezzo("attrezzo", 0);
 		for (int i = 0; i < 9; i++) {
 			this.borsa.addAttrezzo(attrezzo);
@@ -47,7 +47,7 @@ class BorsaTest {
 	}
 	
 	@Test
-	public void testRemoveAttrezzoNonPresente() {
+	public void testRemoveAttrezzo_nonPresente() {
 		assertNull(this.borsa.removeAttrezzo("attrezzoCheNonEsiste"));
 	}
 	
@@ -56,7 +56,7 @@ class BorsaTest {
 	 * l'array non contiene una casella null tra due caselle non null.
 	 */
 	@Test
-	public void testRemoveAttrezzoRipristinaOrdineArray() {
+	public void testRemoveAttrezzo_ripristinaOrdineArray() {
 		Attrezzo attrezzo2 = new Attrezzo("attrezzo2", 1);
 		this.borsa.addAttrezzo(attrezzo2);
 		Attrezzo attrezzo3 = new Attrezzo("attrezzo3", 1);

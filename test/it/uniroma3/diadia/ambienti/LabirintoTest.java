@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import it.uniroma3.diadia.ambienti.Labirinto;
-
 class LabirintoTest {
 	
 	private Labirinto labirinto;
@@ -19,22 +17,22 @@ class LabirintoTest {
 	}
 
 	@Test
-	public void testInitStanzaIngressoCreata() {
+	public void testInit_stanzaIngressoCreata() {
 		assertNotNull(this.labirinto.getStanzaIngresso());
 	}
 	
 	@Test
-	public void testInitStanzaUscitaCreata() {
+	public void testInit_stanzaUscitaCreata() {
 		assertNotNull(this.labirinto.getStanzaVincente());
 	}
 	
 	@Test
-	public void testInitEsisteStanzaAdiacenteIngresso() {
+	public void testInit_esisteStanzaAdiacenteIngresso() {
 		assertNotEquals(0, this.labirinto.getStanzaIngresso().getNumeroStanzeAdiacenti());
 	}
 	
 	@Test
-	public void testInitEsisteStanzaAdiacenteUscita() {
+	public void testInit_esisteStanzaAdiacenteUscita() {
 		assertNotEquals(0, this.labirinto.getStanzaVincente());
 	}
 

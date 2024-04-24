@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 class StanzaTest {
@@ -34,14 +33,14 @@ class StanzaTest {
 	}
 	
 	@Test
-	public void testImpostaStanzaAdicenteAggiornaEsistente() {
+	public void testImpostaStanzaAdicente_aggiornaEsistente() {
 		Stanza stanzaAdiacenteSudNuova = new Stanza("adiacenteSudNuova");
 		this.stanzaNormale.impostaStanzaAdiacente("sud", stanzaAdiacenteSudNuova);
 		assertEquals(stanzaAdiacenteSudNuova, this.stanzaNormale.getStanzaAdiacente("sud"));
 	}
 	
 	@Test
-	public void testImpostaStanzaAdiacenteDirezioneNonValida() {
+	public void testImpostaStanzaAdiacente_inDrezioneNonValida() {
 		Stanza adiacenteNord = new Stanza("adiacenteNord");
 		Stanza adiacenteEst = new Stanza("adiacenteEst");
 		Stanza adiacenteOvest = new Stanza("adiacenteOvest");
@@ -61,14 +60,14 @@ class StanzaTest {
 	}
 	
 	@Test
-	public void testAddAttrezzoSecondo() {
+	public void testAddAttrezzo_secondoAttrezzo() {
 		Attrezzo attrezzo2 = new Attrezzo("attrezzo2", 5);
 		this.stanzaNormale.addAttrezzo(attrezzo2);
 		assertEquals(attrezzo2, this.stanzaNormale.getAttrezzo("attrezzo2"));
 	}
 	
 	@Test
-	public void testAddAttrezzoOltreCapienzaLimite() {
+	public void testAddAttrezzo_oltreCapienzaLimite() {
 		Attrezzo a = new Attrezzo("attrezzo", 1);
 		
 		for(int i = 0; i < 9; i++) {
@@ -87,13 +86,13 @@ class StanzaTest {
 	
 	
 	@Test
-	public void testRemoveAttrezzoInesistente() {
+	public void testRemoveAttrezzo_attrezzoInesistente() {
 		Attrezzo attrezzoInesistente = new Attrezzo("inesistente", 1);
 		assertFalse(this.stanzaNormale.removeAttrezzo(attrezzoInesistente));
 	}
 	
 	@Test
-	public void testRemoveAttrezzoOrdineArrayRistabilito() {
+	public void testRemoveAttrezzo_verificaOrdineArrayRistabilito() {
 		Attrezzo secondoAttrezzo = new Attrezzo("secondo", 1);
 		this.stanzaNormale.addAttrezzo(secondoAttrezzo);
 		this.stanzaNormale.removeAttrezzo(this.attrezzo1);
