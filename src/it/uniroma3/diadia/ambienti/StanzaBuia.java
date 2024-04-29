@@ -10,9 +10,9 @@ public class StanzaBuia extends Stanza {
 	}
 	
 	@Override
-	public String getDescrizione() {
+	public String toString() {
 		if(this.hasAttrezzo(nomeAttrezzoPerIlluminare))
-			return super.getDescrizione();
+			return super.toString();
 		else 
 			return "Qui c'è buio pesto...";
 	}

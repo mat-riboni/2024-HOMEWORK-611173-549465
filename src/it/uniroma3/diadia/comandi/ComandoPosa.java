@@ -1,11 +1,17 @@
 package it.uniroma3.diadia.comandi;
 
+import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class ComandoPosa implements Comando {
 	
 	private String nomeAttrezzo;
+	private IO io;
+
+	public ComandoPosa(IO io) {
+		this.io = io;
+	}
 
 	@Override
 	public void esegui(Partita partita) {
@@ -18,11 +24,11 @@ public class ComandoPosa implements Comando {
 			Attrezzo attrezzoDaPosare = partita.getGiocatore().getBorsa().getAttrezzo(nomeAttrezzo);
 			partita.getStanzaCorrente().addAttrezzo(attrezzoDaPosare);
 			partita.getGiocatore().getBorsa().removeAttrezzo(nomeAttrezzo);
-			System.out.println(partita.getStanzaCorrente().getDescrizione());
-			System.out.println(partita.getGiocatore().getBorsa().toString());
+			this.io.mostraMessaggio(partita.getStanzaCorrente().getDescrizione());
+			this.io.mostraMessaggio(partita.getGiocatore().getBorsa().toString());
 		} else {
-			System.out.println(nomeAttrezzo + " non presente nella borsa!");;
-			System.out.println(partita.getStanzaCorrente().getDescrizione());
+			this.io.mostraMessaggio(nomeAttrezzo + " non presente nella borsa!");;
+			this.io.mostraMessaggio(partita.getStanzaCorrente().getDescrizione());
 		}
 	}
 

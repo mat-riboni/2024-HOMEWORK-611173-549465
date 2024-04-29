@@ -62,15 +62,15 @@ public class DiaDia {
 	 */
 	private boolean processaIstruzione(String istruzione) {	
 		Comando comandoDaEseguire;
-		FabbricaDiComandi factory = new FabbricaDiComandiFisarmonica();
+		FabbricaDiComandi factory = new FabbricaDiComandiFisarmonica(this.io);
 		
 		comandoDaEseguire = factory.costruisciComando(istruzione);
 		comandoDaEseguire.esegui(this.partita);
 		
 		if(this.partita.vinta())
-			System.out.println("Hai vinto!");
+			this.io.mostraMessaggio("Hai vinto!");
 		if(!this.partita.giocatoreIsVivo())
-			System.out.println("Hai esaurito i CFU!");
+			this.io.mostraMessaggio("Hai esaurito i CFU!");
 		return this.partita.isFinita();
 	}   
 
