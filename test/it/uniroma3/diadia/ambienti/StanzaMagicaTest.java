@@ -2,6 +2,7 @@ package it.uniroma3.diadia.ambienti;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -25,8 +26,8 @@ public class StanzaMagicaTest {
 	
 	@Test
 	public void testModificaAttrezzo() {
-		Attrezzo nonModificato = attrezzo1;
-		assertNotEquals(nonModificato, this.magica.modificaAttrezzo(attrezzo1));
+		Attrezzo nonModificato = this.attrezzo1;
+		assertNotEquals(nonModificato.getPeso(), this.magica.modificaAttrezzo(attrezzo1).getPeso());
 	}
 	
 	@Test
@@ -50,7 +51,7 @@ public class StanzaMagicaTest {
 		this.magica.addAttrezzo(attrezzo1);
 		Attrezzo nonModificato = attrezzo2;
 		this.magica.addAttrezzo(attrezzo2);
-		assertNotEquals(nonModificato, this.magica.getAttrezzo(this.attrezzo2.getNome()));
+		assertNotEquals(nonModificato.getPeso(), this.magica.getAttrezzo(this.attrezzo2.getNome()).getPeso());
 	}
 	
 	@Test

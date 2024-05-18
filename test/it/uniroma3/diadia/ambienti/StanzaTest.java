@@ -68,13 +68,12 @@ class StanzaTest {
 	
 	@Test
 	public void testAddAttrezzo_oltreCapienzaLimite() {
-		Attrezzo a = new Attrezzo("attrezzo", 1);
-		
-		for(int i = 0; i < 9; i++) {
-			this.stanzaNormale.addAttrezzo(a);
+		for(int i = 0; i < 10; i++) {
+			this.stanzaNormale.addAttrezzo(new Attrezzo("attrezzo" + i, 1));
 		}
 		
 		Attrezzo attrezzoNonInseribile = new Attrezzo("nonInseribile", 1);
+		assertEquals(10, this.stanzaNormale.getAttrezzi().size());
 		assertFalse(this.stanzaNormale.addAttrezzo(attrezzoNonInseribile));
 	}
 	

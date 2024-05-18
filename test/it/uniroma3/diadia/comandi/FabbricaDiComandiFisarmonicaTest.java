@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.IO;
-import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
 
 public class FabbricaDiComandiFisarmonicaTest {
 

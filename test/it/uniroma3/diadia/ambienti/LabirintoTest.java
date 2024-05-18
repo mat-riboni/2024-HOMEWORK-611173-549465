@@ -12,13 +12,17 @@ class LabirintoTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		
-		this.labirinto = new Labirinto();
-		
+		this.labirinto = new LabirintoBuilder().
+				addStanzaIniziale("inizio").
+				addStanzaVincente("fine").
+				addAdiacenza("inizio", "fine", "nord").
+				addAdiacenza("fine", "inizio", "sud").
+				getLabirinto();	
 	}
 
 	@Test
 	public void testInit_stanzaIngressoCreata() {
-		assertNotNull(this.labirinto.getStanzaIngresso());
+		assertNotNull(this.labirinto.getStanzaIniziale());
 	}
 	
 	@Test
@@ -28,7 +32,7 @@ class LabirintoTest {
 	
 	@Test
 	public void testInit_esisteStanzaAdiacenteIngresso() {
-		assertNotEquals(0, this.labirinto.getStanzaIngresso().getNumeroStanzeAdiacenti());
+		assertNotEquals(0, this.labirinto.getStanzaIniziale().getNumeroStanzeAdiacenti());
 	}
 	
 	@Test

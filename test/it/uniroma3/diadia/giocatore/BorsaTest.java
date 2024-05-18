@@ -2,6 +2,9 @@ package it.uniroma3.diadia.giocatore;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Iterator;
+import java.util.Set;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -51,19 +54,61 @@ class BorsaTest {
 		assertNull(this.borsa.removeAttrezzo("attrezzoCheNonEsiste"));
 	}
 	
-	/*
-	 * Verifica se il metodo ripristina il giusto ordine nell'array "attrezzi", ovvero se 
-	 * l'array non contiene una casella null tra due caselle non null.
-	 */
 	@Test
-	public void testRemoveAttrezzo_ripristinaOrdineArray() {
+	public void testRemoveAttrezzo_attrezzoNelMezzoRimosso() {
 		Attrezzo attrezzo2 = new Attrezzo("attrezzo2", 1);
 		this.borsa.addAttrezzo(attrezzo2);
 		Attrezzo attrezzo3 = new Attrezzo("attrezzo3", 1);
 		this.borsa.addAttrezzo(attrezzo3);
 		this.borsa.removeAttrezzo(attrezzo2.getNome());
 		
-		assertEquals(attrezzo3, this.borsa.getAttrezzi()[1]);
+		assertEquals(attrezzo3, this.borsa.getAttrezzi().get(1));
+	}
+	
+	@Test
+	public void testGetSortedSetOrdinatoPerPeso_stessoPesoDiversoNome() {
+		Attrezzo attrezzoStessoPesoF = new Attrezzo("f",1);
+		Attrezzo attrezzoStessoPesoZ = new Attrezzo("z",1);
+		
+		this.borsa.addAttrezzo(attrezzoStessoPesoZ);
+		this.borsa.addAttrezzo(attrezzoStessoPesoF);
+		
+		Set<Attrezzo> setOrdinato = this.borsa.getSortedSetOrdinatoPerPeso();
+		Iterator<Attrezzo> it = setOrdinato.iterator();
+		assertEquals(this.attrezzo1, it.next());
+		assertEquals(attrezzoStessoPesoF, it.next());;
+		assertEquals(attrezzoStessoPesoZ, it.next());
+	}
+	
+	@Test
+	public void testGetContenutoOrdinatoPerPeso() {
+		Attrezzo attrezzo5 = new Attrezzo("a", 5);
+		Attrezzo attrezzo3 = new Attrezzo("b", 3);
+		this.borsa.addAttrezzo(attrezzo5);
+		this.borsa.addAttrezzo(attrezzo3);
+		
+		Iterator<Attrezzo> it = this.borsa.getContenutoOrdinatoPerPeso().iterator();
+		assertEquals(this.attrezzo1, it.next());
+		assertEquals(attrezzo3, it.next());
+		assertEquals(attrezzo5, it.next());
+	}
+	
+	@Test 
+	public void testGetContenutoOrdinatoPerNome() {
+		Attrezzo aa = new Attrezzo("aa", 1);
+		this.borsa.addAttrezzo(aa);
+		Iterator<Attrezzo> it = this.borsa.getContenutoOrdniatoPerNome().iterator();
+		assertEquals(aa, it.next());
+		assertEquals(this.attrezzo1, it.next());
+		
+	}
+	
+	@Test
+	public void testGetContenutoRaggruppatoPerPeso() {
+		Attrezzo a1 = new Attrezzo("a", 1);
+		this.borsa.addAttrezzo(a1);
+		assertEquals(1, this.borsa.getContenutoRaggruppatoPerPeso().size());
+		assertEquals(2, this.borsa.getContenutoRaggruppatoPerPeso().get(1).size());
 	}
 
 }

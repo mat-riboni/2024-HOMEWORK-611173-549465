@@ -32,8 +32,9 @@ public class ComandoVai implements Comando {
 			return;
 		}
 		partita.setStanzaCorrente(prossimaStanza);
-		this.io.mostraMessaggio(partita.getStanzaCorrente().getNome());
 		partita.getGiocatore().setCfu(partita.getGiocatore().getCfu()-1);
+		ComandoGuarda guarda = new ComandoGuarda(this.io);
+		guarda.esegui(partita);
 			
 	}
 

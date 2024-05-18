@@ -24,7 +24,7 @@ public class Partita {
 		this.giocatore = new Giocatore();
 		this.labirinto = labirinto;
 		this.finita = false;
-		this.stanzaCorrente = this.labirinto.getStanzaIngresso();
+		this.stanzaCorrente = this.labirinto.getStanzaIniziale();
 	}
 
 	public void setStanzaCorrente(Stanza stanzaCorrente) {
@@ -75,6 +75,10 @@ public class Partita {
 	
 	public Labirinto getLabirinto() {
 		return this.labirinto;
+	}
+	
+	public void setLabirinto(Labirinto labirinto) {
+		this.labirinto = labirinto;
 	}
 
 }

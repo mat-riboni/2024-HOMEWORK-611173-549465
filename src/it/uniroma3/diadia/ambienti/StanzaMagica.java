@@ -28,6 +28,10 @@ public class StanzaMagica extends Stanza {
 		return attrezzo;	
 	}
 	
+	public boolean isMagica() {
+		return true;
+	}
+	
 	@Override
 	public boolean addAttrezzo(Attrezzo attrezzo) {
 		this.contatoreAttrezziPosati++;
