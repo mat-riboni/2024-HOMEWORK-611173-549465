@@ -6,22 +6,19 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.IOConsole;
+import it.uniroma3.diadia.ambienti.Labirinto.LabirintoBuilder;
 import it.uniroma3.diadia.Partita;
 
 public class ComandoVaiTest {
 	
 	private Labirinto bilocale;
 	private ComandoVai vai;
-	private IOConsole io;
 	
 	@Before
 	public void setUp() {
 		
-		this.io = new IOConsole();
-		this.vai = new ComandoVai(io);
+		this.vai = new ComandoVai();
 		
 		this.bilocale = new LabirintoBuilder()
 				.addStanzaIniziale("ingresso")

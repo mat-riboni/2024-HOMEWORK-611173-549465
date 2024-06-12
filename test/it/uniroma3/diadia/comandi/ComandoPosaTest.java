@@ -6,11 +6,9 @@ import static org.junit.Assert.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import it.uniroma3.diadia.IO;
-import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
+import it.uniroma3.diadia.ambienti.Labirinto.LabirintoBuilder;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class ComandoPosaTest {
@@ -19,7 +17,6 @@ public class ComandoPosaTest {
 	private ComandoPosa posa;
 	private Partita partita;
 	private Attrezzo attrezzo;
-	private IO io;
 	
 	@BeforeEach
 	public void setUp() {
@@ -28,8 +25,7 @@ public class ComandoPosaTest {
 				getLabirinto();
 		this.partita = new Partita(labirinto);
 		this.attrezzo = new Attrezzo("attrezzo", 1);
-		this.io = new IOConsole();
-		this.posa = new ComandoPosa(this.io);
+		this.posa = new ComandoPosa();
 		this.partita.getGiocatore().getBorsa().addAttrezzo(attrezzo);
 	}
 	
