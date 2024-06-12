@@ -1,51 +1,37 @@
 package it.uniroma3.diadia.comandi;
 
-import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
 
-public class ComandoVai implements Comando {
+public class ComandoVai extends AbstractComando {
 	
-	private String direzione;
-	private IO io;
+	private static final String NOME = "vai";
 	
-	public ComandoVai(IO io) {
-		this.io = io;
-	}
-	
-	@Override
-	public void setParametro(String parametro) {
-		this.direzione = parametro;
+	public ComandoVai() {
+		super.setNome(NOME);
 	}
 
 	@Override
 	public void esegui(Partita partita) {
 		Stanza stanzaCorrente = partita.getStanzaCorrente();
 		Stanza prossimaStanza = null;
-		if(this.direzione == null) {
-			this.io.mostraMessaggio("Dove vuoi andare? \nDevi speficare una direzione!");
+		if(super.getParametro() == null) {
+			super.getIOConsole().mostraMessaggio("Dove vuoi andare? \nDevi speficare una direzione!");
 			return;
 		}
-		prossimaStanza = stanzaCorrente.getStanzaAdiacente(direzione);
+		prossimaStanza = stanzaCorrente.getStanzaAdiacente(super.getParametro());
 		if(prossimaStanza == null) {
-			this.io.mostraMessaggio("Direzione inesistente!");
+			super.getIOConsole().mostraMessaggio("Direzione inesistente!");
 			return;
 		}
 		partita.setStanzaCorrente(prossimaStanza);
 		partita.getGiocatore().setCfu(partita.getGiocatore().getCfu()-1);
-		ComandoGuarda guarda = new ComandoGuarda(this.io);
+		ComandoGuarda guarda = new ComandoGuarda();
+		guarda.setIOConsole(super.getIOConsole());
 		guarda.esegui(partita);
 			
 	}
 
-	@Override
-	public String getNome() {
-		return "vai";
-	}
 
-	@Override
-	public String getParametro() {
-		return this.direzione;
-	}
 
 }

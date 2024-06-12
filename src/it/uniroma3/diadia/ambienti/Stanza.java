@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
 
 /**
  * Classe Stanza - una stanza in un gioco di ruolo.
@@ -26,8 +27,9 @@ public class Stanza implements Comparable<Stanza>{
 	static final private int NUMERO_MASSIMO_ATTREZZI = 10;
 	
 	private String nome;
+	private AbstractPersonaggio personaggio;
     private Set<Attrezzo> attrezzi;
-    private Map<String, Stanza> mapStanzeAdiacenti;
+    private Map<Direzione, Stanza> mapStanzeAdiacenti;
 
     
     /**
@@ -36,7 +38,7 @@ public class Stanza implements Comparable<Stanza>{
      */
     public Stanza(String nome) {
         this.nome = nome;
-        this.mapStanzeAdiacenti = new HashMap<String, Stanza>();
+        this.mapStanzeAdiacenti = new HashMap<Direzione, Stanza>();
         this.attrezzi = new HashSet<Attrezzo>();
     }
 
@@ -47,8 +49,8 @@ public class Stanza implements Comparable<Stanza>{
      * @param stanza stanza adiacente nella direzione indicata dal primo parametro.
      */
     public void impostaStanzaAdiacente(String direzione, Stanza stanza) {
-    	if(this.mapStanzeAdiacenti.size() < NUMERO_MASSIMO_DIREZIONI || this.mapStanzeAdiacenti.containsKey(direzione)) {
-    		this.mapStanzeAdiacenti.put(direzione, stanza);
+    	if(this.mapStanzeAdiacenti.size() < NUMERO_MASSIMO_DIREZIONI || this.mapStanzeAdiacenti.containsKey(Direzione.valueOf(direzione))) {
+    		this.mapStanzeAdiacenti.put(Direzione.valueOf(direzione), stanza);
     	}
     }
 
@@ -57,7 +59,7 @@ public class Stanza implements Comparable<Stanza>{
      * @param direzione
      */
 	public Stanza getStanzaAdiacente(String direzione) {
-		return this.mapStanzeAdiacenti.get(direzione);
+		return this.mapStanzeAdiacenti.get(Direzione.valueOf(direzione));
 	}
 
     /**
@@ -85,7 +87,7 @@ public class Stanza implements Comparable<Stanza>{
         return (new ArrayList<Attrezzo>(this.attrezzi));
     }
     
-    public Map<String, Stanza> getMapStanzeAdiacenti() {
+    public Map<Direzione, Stanza> getMapStanzeAdiacenti() {
     	return this.mapStanzeAdiacenti;
     }
 
@@ -113,8 +115,8 @@ public class Stanza implements Comparable<Stanza>{
     	StringBuilder risultato = new StringBuilder();
     	risultato.append(this.nome);
     	risultato.append("\nUscite: ");
-    	for (String direzione : this.mapStanzeAdiacenti.keySet())
-    		risultato.append(" " + direzione);
+    	for (Direzione direzione : this.mapStanzeAdiacenti.keySet())
+    		risultato.append(" " + direzione.toString());
     	risultato.append("\nAttrezzi nella stanza: ");
     	for (Attrezzo attrezzo : this.attrezzi) {
     		risultato.append(attrezzo.toString()+" ");
@@ -161,14 +163,20 @@ public class Stanza implements Comparable<Stanza>{
 	}
 
 
-	public List<String> getDirezioni() {
-		Set<String> direzioniSet = this.mapStanzeAdiacenti.keySet();
-		List<String> direzioni = new ArrayList<String>(direzioniSet);
-		return direzioni;
+	public Set<Direzione> getDirezioni() {
+		return this.mapStanzeAdiacenti.keySet();
     }
 	
 	public int getNumeroStanzeAdiacenti() {
 		return this.mapStanzeAdiacenti.size();
+	}
+	
+	public void setPersonaggio(AbstractPersonaggio personaggio) {
+		this.personaggio = personaggio;
+	}
+	
+	public AbstractPersonaggio getPersonaggio() {
+		return this.personaggio;
 	}
 	
 	@Override

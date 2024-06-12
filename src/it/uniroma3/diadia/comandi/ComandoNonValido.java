@@ -1,36 +1,19 @@
 package it.uniroma3.diadia.comandi;
 
-import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 
-public class ComandoNonValido implements Comando {
+public class ComandoNonValido extends AbstractComando{
 	
-	private String parametroNullo;
-	private IO io;
+	private static final String NOME = "comando non valido";
 
-	public ComandoNonValido(IO io) {
-		this.io = io;
+	public ComandoNonValido() {
+		super.setNome(NOME);
 	}
 
 	@Override
 	public void esegui(Partita partita) {
-		this.io.mostraMessaggio("Hai inserito un comando non valido!");
+		super.getIOConsole().mostraMessaggio("Hai inserito un comando non valido!");
 
-	}
-
-	@Override
-	public void setParametro(String parametro) {
-		this.parametroNullo = parametro;
-	}
-
-	@Override
-	public String getNome() {
-		return "comando non valido";
-	}
-
-	@Override
-	public String getParametro() {
-		return this.parametroNullo;
 	}
 
 }

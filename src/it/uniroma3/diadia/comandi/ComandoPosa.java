@@ -1,51 +1,34 @@
 package it.uniroma3.diadia.comandi;
 
-import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
-public class ComandoPosa implements Comando {
+public class ComandoPosa extends AbstractComando {
 	
-	private String nomeAttrezzo;
-	private IO io;
+	private static final String NOME = "posa";
 
-	public ComandoPosa(IO io) {
-		this.io = io;
+	public ComandoPosa() {
+		super.setNome(NOME);
 	}
 
 	@Override
 	public void esegui(Partita partita) {
-		if(nomeAttrezzo == null) {
-			System.out.println("Non hai inserito nessun oggetto da posare!");;
+		if(super.getParametro() == null) {
+			super.getIOConsole().mostraMessaggio("Non hai inserito nessun oggetto da posare!");
 		}
 		
 		
-		else if(partita.getGiocatore().getBorsa().hasAttrezzo(nomeAttrezzo)) {
-			Attrezzo attrezzoDaPosare = partita.getGiocatore().getBorsa().getAttrezzo(nomeAttrezzo);
+		else if(partita.getGiocatore().getBorsa().hasAttrezzo(super.getParametro())) {
+			Attrezzo attrezzoDaPosare = partita.getGiocatore().getBorsa().getAttrezzo(super.getParametro());
 			partita.getStanzaCorrente().addAttrezzo(attrezzoDaPosare);
-			partita.getGiocatore().getBorsa().removeAttrezzo(nomeAttrezzo);
-			this.io.mostraMessaggio(partita.getStanzaCorrente().getDescrizione());
-			this.io.mostraMessaggio(partita.getGiocatore().getBorsa().toString());
+			partita.getGiocatore().getBorsa().removeAttrezzo(super.getParametro());
+			super.getIOConsole().mostraMessaggio(partita.getStanzaCorrente().getDescrizione());
+			super.getIOConsole().mostraMessaggio(partita.getGiocatore().getBorsa().toString());
 		} else {
-			this.io.mostraMessaggio(nomeAttrezzo + " non presente nella borsa!");;
-			this.io.mostraMessaggio(partita.getStanzaCorrente().getDescrizione());
+			super.getIOConsole().mostraMessaggio(super.getParametro() + " non presente nella borsa!");;
+			super.getIOConsole().mostraMessaggio(partita.getStanzaCorrente().getDescrizione());
 		}
 	}
 
-	@Override
-	public void setParametro(String parametro) {
-		this.nomeAttrezzo = parametro;
-
-	}
-
-	@Override
-	public String getNome() {
-		return "posa";
-	}
-
-	@Override
-	public String getParametro() {
-		return this.nomeAttrezzo;
-	}
 
 }
